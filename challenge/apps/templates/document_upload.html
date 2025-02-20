@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        input[type="file"], input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message-container {
+            width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-container ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        .message-container li {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Upload Documents</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Display success or error messages -->
+        {% if messages %}
+            <div class="message-container">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <label for="adhar_card">Upload Aadhar Card (PDF):</label>
+        <input type="file" name="adhar_card" id="adhar_card" accept=".pdf" required><br>
+
+        <label for="land_documents">Upload Land Documents (PDF):</label>
+        <input type="file" name="land_documents" id="land_documents" accept=".pdf" required><br>
+
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="Name" required><br>
+
+        <label for="soil_type">Soil Type:</label>
+        <input type="text" name="soil_type" id="soil_type" placeholder="Enter soil type" required><br>
+
+        <label for="water_availability">Water Availability (Yes/No):</label>
+        <input type="text" name="water_availability" id="water_availability" placeholder="Enter water availability" required><br>
+
+        <label for="location">Location (Coordinates or Description):</label>
+        <input type="text" name="location" id="location" placeholder="Enter location details" required><br>
+
+        <!-- New Land Area Field -->
+        <label for="land_area">Land Area (in hectares):</label>
+        <input type="number" name="land_area" id="land_area" placeholder="Enter land area" step="0.01" min="0" required><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>

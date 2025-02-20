@@ -1,0 +1,36 @@
+<!-- templates/app/document_upload_name.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Upload</title>
+</head>
+<body>
+
+<h2>Enter Name to Check Eligibility</h2>
+
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Enter name" required>
+    <button type="submit">Search</button>
+</form>
+
+{% if uploaded_data %}
+    <h3>Details for {{ uploaded_data.name }}:</h3>
+    <p>Soil Type: {{ uploaded_data.soil_type }}</p>
+    <p>Water Availability: {{ uploaded_data.water_availability }}</p>
+    <p>Location: {{ uploaded_data.location }}</p>
+    <p>Eligibility: {{ eligibility }}</p>
+{% endif %}
+
+</body>
+</html>
